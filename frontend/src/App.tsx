@@ -1,30 +1,27 @@
 import * as React from 'react';
+import { Route, Switch } from 'react-router';
+import { inject, observer } from 'mobx-react';
+
+import Header from './components/common/Header';
+import Home from './components/home';
+import Patient from './components/patient';
 
 import './App.css';
 
-import { inject, observer } from 'mobx-react';
-import logo from './logo.svg';
-import UiStore from "./stores/UiStore";
+@inject('routing')
 
-@inject('store')
 @observer
-class App extends React.Component<{store?: UiStore}, object> {
-
-  public updateTheme = (e: React.SyntheticEvent<EventTarget>): void => {
-    this.props.store.toggleTheme()
-  }
-  public render() {
-    const { store } = this.props;
+class App extends React.Component<{routing?: any}, object> {
+  render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React: Theme = {store.theme}</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <button onClick={store.toggleTheme}>Change theme string</button>
+        <Header />
+        <div>
+          <Switch>
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/patient" component={Patient} />
+          </Switch>
+        </div>
       </div>
     );
   }
