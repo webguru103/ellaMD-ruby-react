@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_092748) do
+ActiveRecord::Schema.define(version: 2018_12_11_150813) do
 
   create_table "formulation_ingredients", force: :cascade do |t|
     t.integer "formulation_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2018_12_11_092748) do
     t.string "dateOfBirth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "combine_id"
   end
 
   create_table "test-formulation_ingredients", id: false, force: :cascade do |t|
