@@ -10,27 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_10_004045) do
+ActiveRecord::Schema.define(version: 2018_12_11_092748) do
 
-  create_table "formulation_ingredients", id: false, force: :cascade do |t|
+  create_table "formulation_ingredients", force: :cascade do |t|
     t.integer "formulation_id"
     t.integer "ingredient_id"
-    t.text "percentage"
+    t.string "percentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["formulation_id", "ingredient_id"], name: "combine_percentage_index", unique: true
+    t.index ["formulation_id"], name: "index_formulation_ingredients_on_formulation_id"
+    t.index ["ingredient_id"], name: "index_formulation_ingredients_on_ingredient_id"
   end
 
-  create_table "formulations", id: false, force: :cascade do |t|
-    t.integer "id"
-    t.text "name"
-    t.text "amount1"
-    t.text "amount2"
+  create_table "formulations", force: :cascade do |t|
+    t.string "name"
+    t.string "amount1"
+    t.string "amount2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "ingredients", id: :decimal, force: :cascade do |t|
-    t.text "name"
-    t.text "minimum_percentage"
-    t.text "maximum_percentage"
-    t.text "description"
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name"
+    t.string "minimum_percentage"
+    t.string "maximum_percentage"
+    t.string "description"
     t.text "classes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "patients", force: :cascade do |t|
@@ -39,6 +47,27 @@ ActiveRecord::Schema.define(version: 2018_12_10_004045) do
     t.string "dateOfBirth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "test-formulation_ingredients", id: false, force: :cascade do |t|
+    t.integer "formulation_id"
+    t.integer "ingredient_id"
+    t.text "percentage"
+  end
+
+  create_table "test-formulations", id: false, force: :cascade do |t|
+    t.integer "id"
+    t.text "name"
+    t.text "amount1"
+    t.text "amount2"
+  end
+
+  create_table "test-ingredients", id: :decimal, force: :cascade do |t|
+    t.text "name"
+    t.text "minimum_percentage"
+    t.text "maximum_percentage"
+    t.text "description"
+    t.text "classes"
   end
 
 end

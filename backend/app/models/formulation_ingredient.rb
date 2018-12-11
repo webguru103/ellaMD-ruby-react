@@ -1,0 +1,2 @@
+class FormulationIngredient < ApplicationRecord
+end
