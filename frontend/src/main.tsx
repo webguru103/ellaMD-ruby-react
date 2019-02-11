@@ -1,14 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { useStrict } from 'mobx';
 import { Provider } from 'mobx-react';
 import { createBrowserHistory } from 'history';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { TodoModel } from 'app/models';
 import { createStores } from 'app/stores';
 import { App } from 'app';
-
-// enable MobX strict mode
-useStrict(true);
 
 // default fixtures for TodoStore
 const defaultTodos = [
@@ -23,7 +20,9 @@ const rootStore = createStores(history, defaultTodos);
 // render react DOM
 ReactDOM.render(
   <Provider {...rootStore}>
-    <App history={history} />
+    <MuiThemeProvider>
+      <App history={history} />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
 );
